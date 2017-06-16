@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hvn report</title>
+    <style type="text/css">
+#include( "./src/main/resources/styles.css" )
+    </style>
+</head>
+<body>
+
+<h3>Artifacts</h3>
+<ul>
+#foreach( $artifact in $artifacts )
+#set( $groupId = $artifact.getGroupId() )
+#set( $artifactId = $artifact.getArtifactId() )
+    <li><a href="${groupId}/${artifactId}.html">$artifact</a></li>
+#end
+</ul>
+
+</body>
+</html>

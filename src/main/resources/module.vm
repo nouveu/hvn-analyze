@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PomAnalyzer: $artifact</title>
+    <style type="text/css">
+#include( "./src/main/resources/styles.css" )
+    </style>
+</head>
+<body>
+
+<b><a href="../index.html">Back to main list</a></b>
+
+<h2>${package}:${artifact}</h2>
+<h3>Users</h3>
+<table>
+    <tr>
+        <th class="cell">Module</th>
+        <th class="cell">Scope</th>
+    </tr>
+#foreach( $user in $users )
+#set( $userArtifact = $user.getArtifact() )
+#set( $scope = $user.getDependency().getScope() )
+    <tr>
+        <td class="cell"><a href="../${userArtifact.getGroupId()}/${userArtifact.getArtifactId()}.html">$userArtifact</a></td>
+        <td class="cell">$scope</td>
+    </tr>
+#end
+</table>
+
+<h3>Conflicts</h3>
+<table>
+    <tr>
+        <th class="cell">Conflicted</th>
+        <th class="cell">Conflicting</th>
+    </tr>
+#foreach( $conflict in $conflicts )
+#set( $parentUser = $conflict.getParentUser() )
+    <tr>
+        <td class="cell"><a href="../${parentUser.getGroupId()}/${parentUser.getArtifactId()}.html">$parentUser</a></td>
+        <td class="cell">
+            <ul>
+#foreach( $childUser in $conflict.getChildUsers() )
+                <li><a href="../${childUser.getGroupId()}/${childUser.getArtifactId()}.html">$childUser</a></li>
+#end
+            </ul>
+        </td>
+    </tr>
+#end
+</table>
+
+</body>
+</html>

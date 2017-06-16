@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PomAnalyzer: $artifact</title>
+    <style type="text/css">
+#include( "./src/main/resources/styles.css" )
+    </style>
+</head>
+<body>
+
+<h2>${package}:${artifact}</h2>
+
+<h3>Modules</h3>
+<ul>
+#foreach( $module in $modules )
+#set( $groupId = $module.getGroupId() )
+#set( $artifactId = $module.getArtifactId() )
+    <li><a href="${groupId}/${artifactId}.html">$module</a></li>
+#end
+</ul>
+
+<h3>Dependencies</h3>
+<ul>
+#foreach( $dependency in $dependencies )
+#set( $groupId = $dependency.getGroupId() )
+#set( $artifactId = $dependency.getArtifactId() )
+    <li><a href="${groupId}/${artifactId}.html">$dependency</a></li>
+#end
+</ul>
+
+</body>
+</html>

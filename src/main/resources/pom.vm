@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hvn report</title>
+    <style type="text/css">
+#include( "./src/main/resources/styles.css" )
+    </style>
+</head>
+<body>
+
+<b><a href="../index.html">Back to main list</a></b>
+
+<h2>$pom.getArtifact().toString()</h2>
+
+#if ( !$pom.getDependencies().isEmpty() )
+<h3>Dependencies</h3>
+<table>
+    <tr>
+        <th>Artifact</th>
+        <th>Scope</th>
+        <th>Version</th>
+    </tr>
+#foreach( $dependency in $pom.getDependencies() )
+    <tr>
+        <td>$dependency.toString()</td>
+        <td>$dependency.getScope()</td>
+        <td>$dependency.getVersion()</td>
+    </tr>
+#end
+</table>
+#end
+
+#if ( !$transitives.isEmpty() )
+<h3>Transitive dependencies</h3>
+<table>
+    <tr>
+        <th>Artifact</th>
+        <th>Scope</th>
+        <th>Version</th>
+    </tr>
+#foreach( $transitive in $transitives )
+    <tr>
+        <td>$transitive.toString()</td>
+        <td>$transitive.getScope()</td>
+        <td>$transitive.getVersion()</td>
+    </tr>
+#end
+</table>
+#end
+
+#if ( !$pom.getManagedDependencies().isEmpty() )
+<h3>Managed dependencies</h3>
+<table>
+    <tr>
+        <th>Artifact</th>
+        <th>Scope</th>
+        <th>Version</th>
+    </tr>
+#foreach( $managedDependency in $pom.getManagedDependencies() )
+    <tr>
+        <td>$managedDependency.toString()</td>
+        <td>$managedDependency.getScope()</td>
+        <td>$managedDependency.getVersion()</td>
+    </tr>
+#end
+</table>
+#end
+
+#if ( !$pom.getPlugins().isEmpty() )
+<h3>Plugins</h3>
+<table>
+    <tr>
+        <th>Artifact</th>
+        <th>Version</th>
+    </tr>
+#foreach( $plugin in $pom.getPlugins() )
+    <tr>
+        <td>$plugin.toString()</td>
+        <td>$plugin.getVersion()</td>
+    </tr>
+#end
+</table>
+#end
+
+#if ( !$pom.getManagedPlugins().isEmpty() )
+<h3>Managed plugins</h3>
+<table>
+    <tr>
+        <th>Artifact</th>
+        <th>Version</th>
+    </tr>
+#foreach( $managedPlugin in $pom.getManagedPlugins() )
+    <tr>
+        <td>$managedPlugin.toString()</td>
+        <td>$managedPlugin.getVersion()</td>
+    </tr>
+#end
+</table>
+#end
+
+</body>
+</html>
